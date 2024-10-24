@@ -9,7 +9,7 @@ This is currently a WIP. Here is a list of the corresponding Go packages and Eve
 - [ ] [`crypto/ed25519`](https://pkg.go.dev/crypto/ed25519)/[`EverCrypt_Ed25519`](https://hacl-star.github.io/EverCryptNonAgile.html#ed25519)
 - [ ] [`crypto/hmac`](https://pkg.go.dev/crypto/hmac)/[`EverCrypt_HMAC`](https://hacl-star.github.io/EverCryptHMAC.html)
 - [x] [`crypto/md5`](https://pkg.go.dev/crypto/md5)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
-- [ ] [`crypto/sha1`](https://pkg.go.dev/crypto/sha1)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
+- [x] [`crypto/sha1`](https://pkg.go.dev/crypto/sha1)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
 - [ ] [`crypto/sha256`](https://pkg.go.dev/crypto/sha256)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
 - [ ] [`crypto/sha512`](https://pkg.go.dev/crypto/sha512)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
 - [ ] [`golang.org/x/crypto/blake2b`](https://pkg.go.dev/golang.org/x/crypto/blake2b)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
