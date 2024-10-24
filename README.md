@@ -17,3 +17,4 @@ This is currently a WIP. Here is a list of the corresponding Go packages and Eve
 - [ ] [`golang.org/x/crypto/chacha20poly1305`](https://pkg.go.dev/golang.org/x/crypto/chacha20poly1305)/[`EverCrypt_AEAD`](https://hacl-star.github.io/EverCryptAEAD.html)
 - [ ] [`golang.org/x/crypto/hkdf`](https://pkg.go.dev/golang.org/x/crypto/hkdf)/[`EverCrypt_HKDF`](https://hacl-star.github.io/EverCryptHKDF.html)
 - [ ] [`golang.org/x/crypto/poly1305`](https://pkg.go.dev/golang.org/x/crypto/poly1305)/[`EverCrypt_Poly1305`](https://hacl-star.github.io/EverCryptNonAgile.html#poly1305)
+- [x] [`golang.org/x/crypto/sha3`](https://pkg.go.dev/golang.org/x/crypto/sha3)/[`EverCrypt_Hash`](https://hacl-star.github.io/EverCryptHash.html)
