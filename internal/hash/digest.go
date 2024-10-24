@@ -9,6 +9,8 @@ import (
 	"hash"
 	"runtime"
 	"unsafe"
+
+	_ "mtoohey.com/go-evercrypt"
 )
 
 type Digest struct {
