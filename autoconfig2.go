@@ -1,10 +1,9 @@
-package autoconfig2
+package evercrypt
 
 // #cgo LDFLAGS: -levercrypt
 // #define HACL_CAN_COMPILE_VEC128
 // #define HACL_CAN_COMPILE_VEC256
 // #include <EverCrypt_AutoConfig2.h>
-// #include <EverCrypt_Hash.h>
 import "C"
 
 func init() {

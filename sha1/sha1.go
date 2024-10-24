@@ -11,12 +11,9 @@ package sha1
 import "C"
 import (
 	"crypto"
-	"errors"
 	"hash"
-	"runtime"
-	"unsafe"
 
-	_ "mtoohey.com/go-evercrypt/internal/autoconfig2"
+	internal_hash "mtoohey.com/go-evercrypt/internal/hash"
 )
 
 func init() { crypto.RegisterHash(crypto.SHA1, New) }
@@ -25,52 +22,14 @@ func init() { crypto.RegisterHash(crypto.SHA1, New) }
 const Size = C.SHA1_HASH_LEN
 
 // The blocksize of SHA-1 in bytes.
-const BlockSize = 64
-
-var MaximumLengthExceeded = errors.New("maximum length exceeded")
-
-type digest struct {
-	inner *C.struct_EverCrypt_Hash_Incremental_state_t_s
-}
+const BlockSize = internal_hash.BlockSize
 
 // New returns a new hash.Hash computing the SHA1 checksum.
-func New() hash.Hash {
-	res := &digest{inner: C.EverCrypt_Hash_Incremental_malloc(C.Spec_Hash_Definitions_SHA1)}
-	runtime.SetFinalizer(res, func(d *digest) {
-		C.EverCrypt_Hash_Incremental_free(d.inner)
-	})
-	return res
-}
-
-func (d *digest) Reset() { C.EverCrypt_Hash_Incremental_reset(d.inner) }
-
-func (d *digest) Size() int { return Size }
-
-func (d *digest) BlockSize() int { return BlockSize }
-
-func (d *digest) Write(p []byte) (n int, err error) {
-	res := C.EverCrypt_Hash_Incremental_update(d.inner, (*C.uchar)(unsafe.SliceData(p)), C.uint32_t(len(p)))
-	switch res {
-	case C.EverCrypt_Error_Success:
-		return len(p), nil
-
-	case C.EverCrypt_Error_MaximumLengthExceeded:
-		return 0, MaximumLengthExceeded
-
-	default:
-		panic("EverCrypt_Hash_Incremental_update returned unexpected error code")
-	}
-}
-
-func (d *digest) Sum(b []byte) []byte {
-	var res [Size]byte
-	C.EverCrypt_Hash_Incremental_digest(d.inner, (*C.uchar)(unsafe.SliceData(res[:])))
-	return res[:]
-}
+func New() hash.Hash { return internal_hash.New(C.Spec_Hash_Definitions_SHA1) }
 
 // Sum returns the SHA-1 checksum of the data.
 func Sum(data []byte) [Size]byte {
 	var res [Size]byte
-	C.EverCrypt_Hash_Incremental_hash(C.Spec_Hash_Definitions_SHA1, (*C.uchar)(unsafe.SliceData(res[:])), (*C.uchar)(unsafe.SliceData(data)), C.uint32_t(len(data)))
+	internal_hash.Sum(C.Spec_Hash_Definitions_SHA1, data, res[:])
 	return res
 }
