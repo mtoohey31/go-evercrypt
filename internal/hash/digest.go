@@ -12,11 +12,15 @@ import (
 )
 
 type Digest struct {
-	inner *C.struct_EverCrypt_Hash_Incremental_state_t_s
+	inner     *C.struct_EverCrypt_Hash_Incremental_state_t_s
+	blockSize int
 }
 
-func New(a C.Spec_Hash_Definitions_hash_alg) hash.Hash {
-	res := &Digest{inner: C.EverCrypt_Hash_Incremental_malloc(a)}
+func New(a C.Spec_Hash_Definitions_hash_alg, blockSize int) hash.Hash {
+	res := &Digest{
+		inner:     C.EverCrypt_Hash_Incremental_malloc(a),
+		blockSize: blockSize,
+	}
 	runtime.SetFinalizer(res, func(d *Digest) {
 		C.EverCrypt_Hash_Incremental_free(d.inner)
 	})
@@ -30,9 +34,7 @@ func (d *Digest) Size() int {
 	return int(C.EverCrypt_Hash_Incremental_hash_len(a))
 }
 
-const BlockSize = 64
-
-func (d *Digest) BlockSize() int { return BlockSize }
+func (d *Digest) BlockSize() int { return d.blockSize }
 
 func (d *Digest) Write(p []byte) (n int, err error) {
 	res := C.EverCrypt_Hash_Incremental_update(d.inner, (*C.uchar)(unsafe.SliceData(p)), C.uint32_t(len(p)))

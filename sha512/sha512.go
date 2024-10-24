@@ -27,16 +27,16 @@ const Size384 = C.SHA2_384_HASH_LEN
 
 // BlockSize is the block size, in bytes, of the SHA-384 and SHA-512 hash
 // functions.
-const BlockSize = 64
+const BlockSize = 128
 
 // New returns a new hash.Hash computing the SHA-512 checksum.
 func New() hash.Hash {
-	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_512)
+	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_512, BlockSize)
 }
 
 // New384 returns a new hash.Hash computing the SHA-384 checksum.
 func New384() hash.Hash {
-	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_384)
+	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_384, BlockSize)
 }
 
 // Sum512 returns the SHA512 checksum of the data.

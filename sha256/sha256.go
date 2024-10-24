@@ -30,12 +30,12 @@ const BlockSize = 64
 
 // New returns a new hash.Hash computing the SHA256 checksum.
 func New() hash.Hash {
-	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_256)
+	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_256, BlockSize)
 }
 
 // New224 returns a new hash.Hash computing the SHA224 checksum.
 func New224() hash.Hash {
-	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_224)
+	return internal_hash.New(C.Spec_Hash_Definitions_SHA2_224, BlockSize)
 }
 
 // Sum256 returns the SHA256 checksum of the data.

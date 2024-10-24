@@ -22,10 +22,12 @@ func init() { crypto.RegisterHash(crypto.MD5, New) }
 const Size = C.MD5_HASH_LEN
 
 // The blocksize of MD5 in bytes.
-const BlockSize = internal_hash.BlockSize
+const BlockSize = 64
 
 // New returns a new hash.Hash computing the MD5 checksum.
-func New() hash.Hash { return internal_hash.New(C.Spec_Hash_Definitions_MD5) }
+func New() hash.Hash {
+	return internal_hash.New(C.Spec_Hash_Definitions_MD5, BlockSize)
+}
 
 // Sum returns the MD5 checksum of the data.
 func Sum(data []byte) [Size]byte {

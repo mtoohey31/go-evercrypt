@@ -22,10 +22,12 @@ func init() { crypto.RegisterHash(crypto.SHA1, New) }
 const Size = C.SHA1_HASH_LEN
 
 // The blocksize of SHA-1 in bytes.
-const BlockSize = internal_hash.BlockSize
+const BlockSize = 64
 
 // New returns a new hash.Hash computing the SHA1 checksum.
-func New() hash.Hash { return internal_hash.New(C.Spec_Hash_Definitions_SHA1) }
+func New() hash.Hash {
+	return internal_hash.New(C.Spec_Hash_Definitions_SHA1, BlockSize)
+}
 
 // Sum returns the SHA-1 checksum of the data.
 func Sum(data []byte) [Size]byte {
